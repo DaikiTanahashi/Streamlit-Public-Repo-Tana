@@ -1,0 +1,15 @@
+{
+    "cSpell.words": [
+        "apos",
+        "Cognos",
+        "fitz",
+        "iloc",
+        "initialdir",
+        "pixmap"
+    ],
+    "[python]": {
+        // 拡張機能のBlack Formatterを使う場合には必ず指定する
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    }
+}
