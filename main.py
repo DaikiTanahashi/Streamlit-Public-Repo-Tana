@@ -1,6 +1,7 @@
 import streamlit as st
 
 from app.df_component import df_component
+from app.merge_component import merge_component
 
 
 def main():
@@ -15,9 +16,17 @@ def main():
         df_component2 = df_component("df2")
         df_component2.show_df()
         df_component2.show_options_with_filter()
-        
-    # df_component1.df
-    # df_component1.selected_option
+
+    radio_xlsx_csv = st.radio(
+        "Select output data format",
+        ["xlsx","csv"],
+    )
+
+    if df_component1.df is not None and df_component2.df is not None:
+        m_component = merge_component(radio_xlsx_csv)
+        m_component.show_merge_button(df_component1, df_component2)
+        m_component.show_DL_button()
+
 
 
 if __name__ == "__main__":

@@ -5,12 +5,15 @@ from chardet import detect
 
 class df_component:
     def __init__(self, df_name: str) -> None:
+        self.df = None
         self.df_name = df_name
         self.uploaded_file = st.file_uploader(f"Choose a file for {self.df_name}")
+        self.selected_option = None
 
     def show_df(self):
         if self.uploaded_file is not None:
             self._get_df()
+            st.write(self.df.head(n=3))
 
     def _get_df(self) -> pd.DataFrame:
         file_name = self.uploaded_file.name
