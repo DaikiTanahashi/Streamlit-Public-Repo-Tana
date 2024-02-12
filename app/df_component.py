@@ -37,6 +37,7 @@ class df_component:
                 self._filtered_options(options, filter_text),
                 label_visibility="collapsed",
             )
+            self.selected_option = selected_option
 
     def _filtered_options(self, options: list, filter_text: str) -> list:
         # フィルタされた項目だけをリストに保持
