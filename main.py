@@ -1,7 +1,7 @@
 import streamlit as st
 
-from app.df_component import df_component
-from app.merge_component import merge_component
+from app.df_comp import df_comp
+from app.merge_comp import merge_comp
 
 
 def main():
@@ -11,21 +11,21 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
-        df_component1 = df_component("df1")
-        df_component1.show_df()
-        df_component1.show_options_with_filter()
+        df_comp1 = df_comp("df1")
+        df_comp1.show_df()
+        df_comp1.show_options_with_filter()
 
     with col2:
-        df_component2 = df_component("df2")
-        df_component2.show_df()
-        df_component2.show_options_with_filter()
+        df_comp2 = df_comp("df2")
+        df_comp2.show_df()
+        df_comp2.show_options_with_filter()
 
     st.divider()
 
-    if df_component1.df is not None and df_component2.df is not None:
-        m_component = merge_component()
-        m_component.show_merge_button(df_component1, df_component2)
-        m_component.show_DL_button()
+    if df_comp1.df is not None and df_comp2.df is not None:
+        m_comp = merge_comp()
+        m_comp.show_merge_button(df_comp1, df_comp2)
+        m_comp.show_DL_button()
 
 
 if __name__ == "__main__":

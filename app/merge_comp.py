@@ -2,22 +2,28 @@ import pandas as pd
 import streamlit as st
 from io import BytesIO
 
-from app.df_component import df_component
+from app.df_comp import df_comp
 
 
-class merge_component:
+class merge_comp:
     def __init__(self) -> None:
         self.df = None
 
     def show_merge_button(
-        self, df_component1: df_component, df_component2: df_component
+        self, df_comp1: df_comp, df_comp2: df_comp
     ):
         if st.button("let's merge!"):
+            df_comp1.df[df_comp1.selected_option] = df_comp1.df[
+                df_comp1.selected_option
+            ].astype(str)
+            df_comp2.df[df_comp2.selected_option] = df_comp2.df[
+                df_comp2.selected_option
+            ].astype(str)
             df = pd.merge(
-                df_component1.df,
-                df_component2.df,
-                left_on=df_component1.selected_option,
-                right_on=df_component2.selected_option,
+                df_comp1.df,
+                df_comp2.df,
+                left_on=df_comp1.selected_option,
+                right_on=df_comp2.selected_option,
                 how="left",
             )
             self.df = df
@@ -30,7 +36,7 @@ class merge_component:
             self._convert_df_xlsx()
 
     def _convert_df_csv(self):
-        csv_data=self.df.to_csv(index=False).encode("utf-8")
+        csv_data = self.df.to_csv(index=False).encode("utf-8")
         st.download_button(
             label="Download data as CSV",
             data=csv_data,
@@ -41,7 +47,7 @@ class merge_component:
     def _convert_df_xlsx(self):
         output = BytesIO()  # BytesIOは、Excelデータを一時的に保持するためのもの
         self.df.to_excel(output, index=False)
-        xlsx_data =output.getvalue()
+        xlsx_data = output.getvalue()
         st.download_button(
             label="Download data as EXCEL",
             data=xlsx_data,
