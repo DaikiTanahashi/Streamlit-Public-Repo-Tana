@@ -13,6 +13,7 @@ class df_component:
     def show_df(self):
         if self.uploaded_file is not None:
             self._get_df()
+            st.caption("Sample (first 3 rows)")
             st.write(self.df.head(n=3))
 
     def _get_df(self) -> pd.DataFrame:
