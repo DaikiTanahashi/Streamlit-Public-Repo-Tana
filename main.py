@@ -6,7 +6,7 @@ from app.merge_comp import merge_comp
 
 def main():
     st.title("File merger")
-    st.write("２つのファイル（csv or excel）を指定列でvlookup的な感じでくっつけます。")
+    st.write("２つのファイル（csvまたはexcel）を取り込んで、指定された列でvlookup的なアレでくっつけます。　※csvの中身に改行があるとダメです。")
 
     col1, col2 = st.columns(2)
 
@@ -23,10 +23,18 @@ def main():
     st.divider()
 
     if df_comp1.df is not None and df_comp2.df is not None:
-        m_comp = merge_comp()
-        m_comp.show_merge_button(df_comp1, df_comp2)
+        m_comp = merge_comp(df_comp1, df_comp2)
+        m_comp.show_merge_button()
         m_comp.show_DL_button()
 
 
 if __name__ == "__main__":
+    # StreamlitのスタイリングTips より
+    # https://qiita.com/papasim824/items/af2d18f3802e632ffa80
+    SET_PAGE_CONFIG = {
+        "page_title": "File merger",
+        "layout": "wide",
+        "initial_sidebar_state": "collapsed",
+    }
+    st.set_page_config(**SET_PAGE_CONFIG)
     main()
