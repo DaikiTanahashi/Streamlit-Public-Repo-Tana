@@ -3,11 +3,11 @@ import pandas as pd
 import streamlit as st
 from io import BytesIO
 
-from app.df_comp import df_comp
+from app.df_comp import DfComp
 
 
-class merge_comp:
-    def __init__(self, df_comp1: df_comp, df_comp2: df_comp) -> None:
+class MergeComp:
+    def __init__(self, df_comp1: DfComp, df_comp2: DfComp) -> None:
         self.df = None
         self.df1 = df_comp1.df
         self.df2 = df_comp2.df

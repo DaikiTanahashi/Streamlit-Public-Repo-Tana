@@ -3,7 +3,7 @@ import streamlit as st
 from chardet import detect
 
 
-class df_comp:
+class DfComp:
     def __init__(self, df_name: str) -> None:
         self.df = None
         self.df_name = df_name
