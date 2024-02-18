@@ -31,8 +31,8 @@ def main():
 
         if m_comp.df is not None:
             DL_comp = DfDownloadComp(m_comp.merged_name)
-            DL_comp.show_df_DL_button_as_xlsx(m_comp.df)
-            DL_comp.show_df_DL_button_as_csv(m_comp.df)
+            DL_comp.show_df_download_button_as_xlsx(m_comp.df)
+            DL_comp.show_df_download_button_as_csv(m_comp.df)
 
 
 if __name__ == "__main__":
