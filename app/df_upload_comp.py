@@ -3,20 +3,21 @@ import streamlit as st
 from chardet import detect
 
 
-class DfComp:
+class DfUploadComp:
     def __init__(self, df_name: str) -> None:
-        self.df = None
         self.df_name = df_name
-        self.uploaded_file = st.file_uploader(f"Choose a file for {self.df_name}")
+        self.df = None
+        self.uploaded_file = None
         self.selected_option = None
 
-    def show_df(self):
+    def show_upload_button(self) -> None:
+        self.uploaded_file = st.file_uploader(f"Choose a file for {self.df_name}")
         if self.uploaded_file is not None:
-            self._get_df()
+            self._get_df_from_file()
             st.caption("Sample (first 3 rows)")
             st.write(self.df.head(n=3))
 
-    def _get_df(self) -> pd.DataFrame:
+    def _get_df_from_file(self) -> pd.DataFrame:
         file_name = self.uploaded_file.name
         file_extension = file_name.split(".")[-1]  # 拡張子を取得
         if "xls" in file_extension:
@@ -32,7 +33,7 @@ class DfComp:
             st.write("拡張子が正しくありません。")
             self.uploaded_file = None
 
-    def show_options_with_filter(self):
+    def show_options_with_filter(self) -> None:
         if self.uploaded_file is not None:
             options = self.df.columns.tolist()
             filter_text = st.text_input(f"Filter options for {self.df_name}", "")
@@ -44,7 +45,7 @@ class DfComp:
             self.selected_option = selected_option
 
     def _filtered_options(self, options: list, filter_text: str) -> list:
-        # フィルタされた項目だけをリストに保持
+        """フィルタされた項目だけをリストに保持"""
         filtered_options = []
         for option in options:
             if filter_text.lower() in option.lower():
