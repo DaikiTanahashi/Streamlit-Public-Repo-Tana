@@ -16,14 +16,14 @@ class DfMergeComp:
         self.file_name2 = self._shorten_name(df_comp2.uploaded_file.name, 20)
         self.merged_name = f"{self.file_name1}_{self.file_name2}"
 
-    def _shorten_name(self, file_name: str, max_length: int):
+    def _shorten_name(self, file_name: str, max_length: int) -> str:
         base_name, extension = os.path.splitext(file_name)  # 名前と拡張子を分割
         if len(base_name) > max_length:
             return base_name[:max_length]
         else:
             return base_name
 
-    def show_merge_button(self):
+    def show_merge_button(self) -> None:
         if st.button("let's merge!"):
             self.df1[self.select1] = self.df1[self.select1].astype(str)
             self.df2[self.select2] = self.df2[self.select2].astype(str)

@@ -2,6 +2,8 @@ import pandas as pd
 import streamlit as st
 from chardet import detect
 
+from app.ErrorHandler import CustomError
+
 
 class DfUploadComp:
     def __init__(self, df_name: str) -> None:
@@ -17,8 +19,8 @@ class DfUploadComp:
             st.caption("Sample (first 3 rows)")
             st.write(self.df.head(n=3))
 
-    def _get_df_from_file(self) -> pd.DataFrame:
-        file_name = self.uploaded_file.name
+    def _get_df_from_file(self) -> None:
+        file_name: str = self.uploaded_file.name
         file_extension = file_name.split(".")[-1]  # 拡張子を取得
         if "xls" in file_extension:
             df = pd.read_excel(self.uploaded_file)
@@ -30,8 +32,8 @@ class DfUploadComp:
             df = pd.read_csv(self.uploaded_file, encoding=encoding)
             self.df = df
         else:
-            st.write("拡張子が正しくありません。")
-            self.uploaded_file = None
+            raise CustomError(f"file extension is incorrect")
+
 
     def show_options_with_filter(self) -> None:
         if self.uploaded_file is not None:
