@@ -2,8 +2,8 @@ import os
 import streamlit as st
 from pathlib import Path
 
-from app.download_comp import *
 from app.df_upload_comp import DfUploadComp
+from app.download_comp import FileDownloadComp, Wb2ExcelDownload
 from app.template_processor import CustomError, ExcelTemplateProcessor
 from main import setting
 
